@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+    background: linear-gradient(45deg, #2b2e4a, #3c4160, #43467a, #5a5f9f);
+    color: #fff;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.navbar {
+    background-color: #2b2e4a;
+}
+
+.nav-link {
+    color: #fff !important;
+    margin-right: 1rem;
+}
+
+.nav-link.btn {
+    margin-right: 0;
+}
+
+.container-fluid {
+    padding-top: 60px; /* Add space for fixed navbar */
+}
+
+.signup-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #2b2e4a;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.signup-form {
+    width: 100%;
+}
+
+.signup-form h2 {
+    margin-bottom: 2rem;
+}
+
+.signup-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.signup-form .form-check {
+    display: flex;
+    align-items: center;
+}
+
+.signup-form .form-check-label {
+    margin-left: 0.5rem;
+}
+
+.signup-form .form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.signup-form .forgot-password {
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.signup-form .forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-primary {
+    background-color: #ff007f;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .signup-container {
+        padding: 1.5rem;
+    }
+}
+
+    </style>
+ </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <img src="Design (1).png" alt=""style="height:40px;">       
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Download</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="http://127.0.0.1:5500/%20login.html#signup">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid d-flex align-items-center justify-content-center min-vh-100">
+        <div class="signup-container">
+            <div class="signup-form">
+                <h2 class="text-center">Sign Up</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="createPassword">Create Password</label>
+                        <input type="password" class="form-control" id="createPassword" placeholder="Create password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

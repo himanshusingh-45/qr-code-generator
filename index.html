@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.min.js"></script>
+    <script></script>
+    <link rel="icon" href="/images/scan.png" type="image/x-icon">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-text {
+            font-family: 'Lato', sans-serif;
+            font-size: 17px;
+        }
+
+        .card-heading {
+            text-align: left;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .card-heading:hover {
+            color: lightblue;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8f9fa;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 767.98px) {
+            .card-text {
+                font-size: 16px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .col-sm-7 {
+                padding-left: 0;
+            }
+        }
+
+        button {
+            width: 180px;
+            height: 50px;
+            border-radius: 20px;
+            background-color: #17a2b8;
+            color: white;
+            margin: 22px;
+            font-size: 16px;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        button:hover {
+            background-color: #138496;
+            transform: scale(1.05);
+        }
+
+        .box {
+            margin-top: 20px;
+            height: 50px;
+            font-size: 15px;
+            background-color: white;
+            text-align: center;
+            justify-content: center;
+            line-height: 50px;
+            border-radius: 20px;
+            border: 2px solid #138496;
+            transition: background-color 0.3s, transform 0.3s;
+            font-weight: 800;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+            background-color: #138496;
+            color: white;
+        }
+
+        .container-box {
+            min-width: 1150px;
+            height: auto;
+            background-color: whitesmoke;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        .button-section {
+            background: #ffc107;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .qr {
+            background-color: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-code {
+            background-color: white;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 800px) {
+            .qr-code img {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container-box {
+                min-width: auto;
+            }
+
+            .qr {
+                margin-top: 20px;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #563d7c;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-toggler {
+            width: 55px;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 10px;
+        }
+
+        .navbar-nav .nav-item .btn {
+            margin: 0;
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-nav .nav-item {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .navbar-nav .nav-item .btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+
+        nav ul li a {
+            line-height: 100%;
+        }
+
+        .contact-form {
+            margin-top: 30px;
+            background: whiteyellow;
+             border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        .c-form {
+            background-color: whitesmoke;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Nav Start -->
+         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <img src="Design (1).png" alt="" style="height:40px;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#generateqr">Generate QR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contactus">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#feature">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="http://127.0.0.1:5500/register.html?#">Sign
+                        Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="http://127.0.0.1:5500/%20login.html#signup">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+        <!-- Nav End -->
+
+        <div id="generateqr" class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <div class="container-box">
+                    <div class="row">
+                        <div class="col-12 col-lg-8">
+                            <div class="row mt-5">
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 1</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 2</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 3</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 4</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 5</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 6</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 7</div>
+                                </div>
+                                <div class="col-6 col-md-4 col-lg-3">
+                                    <div class="box">URL 8</div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-12 button-section">
+                                    <h3 class="text-center mb-4">Enter URL to generate QR Code</h3>
+                                    <form id="qrForm">
+                                        <div class="form-group">
+                                            <input type="text" id="qrText" class="form-control" placeholder="Enter URL"
+                                                required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"
+                                            style="border-radius: 20px;">Generate QR Code</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="qr">
+                                <div id="qrcode" class="qr-code"></div>
+                            </div>
+                            <button onclick="downloadQRCode()">Download QR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="text-center mt-5">What is This QR Code? Explain it Please</h1>
+        <h5 class="text-center">Here is some information about QR Codes</h5>
+
+        <div id="about" class="row justify-content-center mt-5">
+            <div class="col-md-5">
+                <img src="/images/hand-qrcodes.png" alt="QR Codes" class="img-fluid" style="max-height: 500px;">
+            </div>
+            <div class="col-md-7 text-dark mt-4" style="font-size: 22px;">
+                <h4 class="text-center" style="font-weight: 800;">What is This QR?</h4>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam magni
+                    molestiae odio aspernatur doloremque? Quidem quos iusto omnis rem alias molestiae deserunt
+                    earum, ab
+                    est
+                    corrupti amet commodi blanditiis repellat consequuntur quasi. Aliquid, necessitatibus? Esse
+                    asperiores
+                    vero repudiandae, minus sed consequatur eum omnis, ea harum odio, distinctio error! Vitae,
+                    itaque
+                    Lorem
+                    ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus ipsa ullam voluptatibus
+                    exercitationem facere architecto officiis commodi nostrum, aliquam ad deserunt, corporis dolore
+                    reiciendis! Doloribus facilis vitae cupiditate sint impedit?
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mt-5 text-center" style="font-weight: 800;">What type of QR Codes can I create?</h1>
+                <h4 class="text-center pt-3">We offer these Static QR Codes that are completely free and will never
+                    expire. Once generated, they’re yours forever but you will not be able to edit the content or
+                    track
+                    its scans.</h4>
+            </div>
+        </div>
+
+        <div id="feature" class="row mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Lorem ipsum dolor sit amet consectetur adipisicing
+                                    elit.
+                                    Fugiat dignissimos autem hic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Lorem ipsum dolor sit amet consectetur adipisicing
+                                    elit.
+                                    Fugiat dignissimos autem hic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <div class="card-heading">Social Media</div>
+                                <p class="card-text">Some quick example text to build on the card title and make up
+                                    the
+                                    bulk of the card's content. Consequatur et dolor, expedita reiciendis, cum velit
+                                    laudantium veniam.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 class="text-center" style="font-weight: 700;">Create Your Custom QR Codes? Steps</h1>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <h4 style="font-weight: 800;">Generate a QR code from URL fully Free.</h4>
+                        <p>It is easy to access all the QR Codes because you copy their link and paste it. QR Code
+                            is so
+                            easy to generate.</p>
+
+                        <h4 class="mt-4" style="font-weight: 800;">QR helps to Pretend.</h4>
+                        <p class="mt-2">It is easy to access all the QR Codes because you copy their link and paste
+                            it.
+                            QR Code is so easy to generate.</p>
+
+                        <h4 class="mt-4" style="font-weight: 800;">Add a Customized Logo in QR.</h4>
+                        <p class="mt-2">It is easy to access all the QR Codes because you copy their link and paste
+                            it.
+                            QR Code is so easy to generate.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="/images/4149572.jpg" alt="QR Code Examples" class="img-fluid"
+                            style="max-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button>Generate Qr Code</button>
+
+        <div id="contactus" class="row contact-form">
+            <div class="col-lg-12">
+                <div class="row c-form mt-3 p-3">
+                    <div class="col-md-6 mb-3">
+                        <h2>Contact Us</h2>
+
+                        <form action="">
+                            <div class="form-group">
+                                Enter Name:
+                                <input type="text" placeholder="Enter Name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Enter Email:
+                                <input type="email" placeholder="Enter Email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Subject:
+                                <input type="text" placeholder="Subject" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                Message:
+                                <textarea class="form-control" placeholder="Message" id="textAreaExample1"
+                                    rows="4"></textarea>
+                            </div>
+                            <button type="submit">Send Message</button>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2861.263842812673!2d81.24988077784244!3d26.212335046001986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399ba6cd279c35e3%3A0x3bebfc3932af9f37!2z4KS44KS_4KS14KS_4KSyIOCksuCkvuCkh-CkqOCljeCkuCDgpJrgpYzgpLDgpL7gpLngpL4!5e0!3m2!1shi!2sin!4v1721361276703!5m2!1shi!2sin"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        &copy; 2024 QR Code Generator. All rights reserved.
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+
+
+
+        document.getElementById('qrForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const qrText = document.getElementById('qrText').value;
+            if (qrText) {
+                document.getElementById('qrcode').innerHTML = "";
+                new QRCode(document.getElementById('qrcode'), qrText);
+            }
+        });
+
+
+        //Function to generate qr code 
+
+        function generateRandomQRCode() {
+            const randomString = Math.random().toString(36).substring(7); // Generate a random string
+            const qrCodeContainer = document.getElementById('qrcode');
+            qrCodeContainer.innerHTML = ""; // Clear any existing QR code
+            new QRCode(qrCodeContainer, randomString); // Generate new QR code
+        }
+
+        // Call the function to generate a random QR code when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            generateRandomQRCode();
+        });
+
+        // Download qr Code image
+
+        function downloadQRCode() {
+            const qrCodeContainer = document.getElementById('qrcode');
+            const img = qrCodeContainer.querySelector('img') || qrCodeContainer.querySelector('canvas');
+
+            if (img) {
+                const link = document.createElement('a');
+                link.href = img.src || img.toDataURL("image/png");
+                link.download = 'qrcode.png';
+                link.click();
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
