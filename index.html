@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.min.js"></script>
     <script></script>
     <link rel="icon" href="scan.png" type="image/x-icon">
@@ -16,8 +18,28 @@
         }
 
         .container {
+            width: 100%;
+            max-width: 1200px; /* Adjust as needed */
+            margin: 0 auto;
             padding: 20px;
         }
+        .text-box {
+             padding: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .text-box {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
 
         .card {
             transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
@@ -116,7 +138,7 @@
         }
 
         .container-box {
-            min-width: 1150px;
+            min-width: 1000px;
             height: auto;
             background-color: whitesmoke;
             border-radius: 15px;
@@ -318,13 +340,92 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transform: translateY(-5px);
         }
+
+        .ratingcard {
+            max-width: 500px;
+            height: 400px;
+            margin:auto;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .ratingcard img {
+            width: 2    50px;
+            height: 2   50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .ratingcard {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        .cta-box {
+            background-color: #ffe6f0;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .cta-box h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .cta-box h2 span {
+            color: #ff4081;
+            font-weight: bold;
+        }
+
+        .cta-box p {
+            font-size: 1rem;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .cta-box .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 50px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-box .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        @media (max-width: 768px) {
+    .navbar-nav .nav-item {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    .navbar-nav .nav-item .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+/* Smaller logo on smaller screens */
+@media (max-width: 576px) {
+    .navbar img {
+        height: 30px; /* Adjust logo size */
+    }
+}
     </style>
 </head>
 
 <body>
     <div class="container">
         <!-- Nav Start -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <img src="Design (1).png" alt="" style="height:40px;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -345,15 +446,15 @@
                         <a class="nav-link" href="#feature">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white" href="register.html">Sign
-                            Up</a>
+                        <a class="nav-link btn btn-primary text-white" href="register.html">Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary text-white" href="login.html">Login</a>
+                        <a class="nav-link btn btn-primary text-white" href="http://127.0.0.1:5500/%20login.html#signup">Login</a>
                     </li>
                 </ul>
             </div>
         </nav>
+        
 
         <!-- Nav End -->
 
@@ -400,7 +501,7 @@
                                             class="fa-solid fa-mobile"></i></div>
                                 </div>
                             </div>
-                            <div div class="mt-5">
+                            <div class="mt-5">
                                 <div id="urlFields" class="hidden">
                                     <div class="form-group">
                                         <label for="urlInput">Enter URL:</label>
@@ -520,398 +621,638 @@
                                             placeholder="Enter Mobile URL">
                                     </div>
                                 </div>
+ 
+                            <!-- Add this to your existing HTML -->
+                            <div class="row mt-3">
+                                <div class="col-12 col-lg-8">
+                                    <button onclick="generateQRCode()" class="btn btn-primary">Generate QR Code</button>
+                                </div>
+                                <div class="col-12 col-lg-4 text-lg-right">
+                                    <button onclick="customizeQRCode()" class="btn btn-secondary">Customize QR
+                                        Code</button>
+
+                                </div>
+                                <div class="modal fade" id="customizeQRModal" tabindex="-1" aria-labelledby="customizeQRModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="customizeQRModalLabel">Customize Your QR Code</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="customizeForm">
+                                                    <!-- Color Options -->
+                                                    <div class="form-group">
+                                                        <label for="qrColor">Select QR Code Color:</label>
+                                                        <input type="color" class="form-control" id="qrColor" value="#000000">
+                                                    </div>
+                            
+                                                    <!-- Shape Options -->
+                                                    <div class="form-group">
+                                                        <label for="qrShape">Select QR Code Shape:</label>
+                                                        <select class="form-control" id="qrShape">
+                                                            <option value="square">Square</option>
+                                                            <option value="circle">Circle</option>
+                                                        </select>
+                                                    </div>
+                            
+                                                    <!-- Logo Upload -->
+                                                    <div class="form-group">
+                                                        <label for="qrLogo">Upload Logo:</label>
+                                                        <input type="file" class="form-control" id="qrLogo" accept="image/*">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" onclick="applyCustomization()">Apply Customization</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <button onclick="generateQRCode()" class="btn btn-primary">Generate QR Code</button>
+                        </div>
                         </div>
                         <div class="col-12 col-lg-4">
                             <div class="qr">
                                 <div id="qrcode" class="qr-code"></div>
                             </div>
-                            <button onclick="downloadQRCode()">Download QR <i class="fa-solid fa-download"></i></button>
+                            <button onclick="downloadQRCode()" class="btn btn-secondary">Download QR <i
+                                    class="fa-solid fa-download"></i></button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <h1 class="text-center mt-5">What is This QR Code? Explain it Please</h1>
-        <h5 class="text-center">Here is some information about QR Codes</h5>
 
-        <div id="about" class="row justify-content-center mt-5">
-            <div class="col-md-5">
-                <img src="hand-qrcodes.png" alt="QR Codes" class="img-fluid" style="max-height: 500px;">
             </div>
-            <div class="col-md-7 text-dark mt-4" style="font-size: 20px;">
-                <h4 class="text-center" style="font-weight: 800;">What is This QR?</h4>
-                <p>
-                    Fusion QR Generator is a versatile tool designed to simplify the creation of customized QR codes.
-                    Whether you need to generate a QR code for a URL, text, email, SMS, Wi-Fi, VCard, image, social
-                    media link, or mobile app, Fusion QR Generator has you covered. With its user-friendly interface,
-                    you can easily enter the desired information, choose the type of QR code you need, and instantly
-                    generate it. The tool also allows you to customize the design, including options for frames, shapes,
-                    colors, and logos, making your QR codes not just functional but also visually appealing. Fusion QR
-                    Generator is perfect for businesses, marketers, and individuals looking to create dynamic and
-                    personalized QR codes for various purposes, ensuring that your digital content is easily accessible
-                    with a simple .
-                </p>
-            </div>
-        </div>
+</div>
+            <h1 class="text-center mt-5">What is This QR Code? Explain it Please</h1>
+            <h4 class="text-center">Here is some information about QR Codes</h4>
 
-        <div class="row">
-            <div class="col-12">
-                <h1 class="mt-5 text-center" style="font-weight: 800;">What type of QR Codes can I create?</h1>
-                <h4 class="text-center pt-3">We offer these Static QR Codes that are completely free and will never
-                    expire. Once generated, they’re yours forever but you will not be able to edit the content or
-                    track
-                    its scans.</h4>
-            </div>
-        </div>
+            <div id="about" class="row justify-content-center mt-5">
+                
+                <div class="col-md-5">
+                    <img src="hand-qrcodes.png" alt="QR Codes" class="img-fluid" style="max-height: 500px;">
+                </div>
+                <div class="col-md-7 text-dark mt-4" style="font-size: 20px;">
+                    <div class="text-box">
 
-        <div id="feature" class="row mt-5">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">URL</div>
-                                <p class="card-text">Generate QR codes for URLs. Simply enter the URL you want
-                                    to
-                                    encode, and our tool will create a QR code that links directly to that
-                                    address.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">Text <i class="fa-regular fa-comments"></i></div>
-                                <p class="card-text">Create QR codes that display text. Enter the text you want
-                                    to
-                                    show,
-                                    and our generator will create a QR code that reveals your message when
-                                    scanned.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">Email <i class="fa-solid fa-envelope"></i></div>
-                                <p class="card-text">Generate QR codes that open a pre-filled email. Enter the
-                                    recipient, subject, and message, and our tool will create a QR code that
-                                    opens
-                                    an
-                                    email client with your details.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h4 class="text-center" style="font-weight: 800; word-wrap: break-word;">What is This QR?</h4>
+                    <p class="" style="word-wrap: break-word;">
+                        Fusion QR Generator is a versatile tool
+                         designed
+                         to simplify the creation of customized QR codes.
+                        Whether you need to generate a QR code for a URL, text, email, SMS, Wi-Fi, VCard, image, social media link,
+                        or mobile app, Fusion QR Generator has you covered. With its user-friendly interface, you can easily enter
+                        the desired information, choose the type of QR code you need, and instantly generate it. The tool also
+                        allows you to customize the design, including options for frames, shapes, colors, and logos, making your QR
+                        codes not just functional but also visually appealing. Fusion QR Generator is perfect for businesses,
+                        marketers, and individuals looking to create dynamic and personalized QR codes for various purposes,
+                        ensuring that your digital content is easily accessible with a simple scan.
+                    </p>
                 </div>
             </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">SMS <i class="fa-regular fa-comments"></i></div>
-                                <p class="card-text">Create QR codes for SMS messages. Enter the phone number
-                                    and
-                                    message, and our generator will create a QR code that opens a messaging app
-                                    with
-                                    your pre-written text.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">Whatsapp <i class="fa-brands fa-whatsapp"></i></div>
-                                <p class="card-text">Generate QR codes for Wi-Fi access. Enter the SSID,
-                                    password,
-                                    and
-                                    encryption type, and our tool will create a QR code that allows users to
-                                    connect
-                                    to
-                                    your network easily.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">VCard <i class="fa-regular fa-address-card"></i></div>
-                                <p class="card-text">Create QR codes for VCards. Enter contact details like
-                                    name,
-                                    phone,
-                                    email, address, and website, and our generator will create a QR code that
-                                    adds
-                                    your
-                                    contact to a device.</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
 
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">Social Media <i class="fa-brands fa-facebook"></i>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="mt-5 text-center" style="font-weight: 800;">What type of QR Codes can I create?</h1>
+                    <h4 class="text-center pt-3">We offer these Static QR Codes that are completely free and will
+                        never
+                        expire. Once generated, they’re yours forever but you will not be able to edit the content
+                        or
+                        track
+                        its scans.</h4>
+                </div>
+            </div>
+
+            <div id="feature" class="row mt-5">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">URL</div>
+                                    <p class="card-text">Generate QR codes for URLs. Simply enter the URL you want
+                                        to
+                                        encode, and our tool will create a QR code that links directly to that
+                                        address.
+                                    </p>
                                 </div>
-                                <p class="card-text">Create QR codes for VCards. Enter contact details like
-                                    name,
-                                    phone,
-                                    email, address, and website, and our generator will create a QR code that
-                                    adds
-                                    your
-                                    contact to a device.</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card" style="width: 100%;">
-                            <div class="card-body">
-                                <div class="card-heading">Wifi <i class="fa-solid fa-wifi"></i></div>
-                                <p class="card-text">Create QR codes for VCards. Enter contact details like
-                                    name,
-                                    phone,
-                                    email, address, and website, and our generator will create a QR code that
-                                    adds
-                                    your
-                                    contact to a device.</p>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">Text <i class="fa-regular fa-comments"></i></div>
+                                    <p class="card-text">Create QR codes that display text. Enter the text you want
+                                        to
+                                        show,
+                                        and our generator will create a QR code that reveals your message when
+                                        scanned.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-
-                <div class="row mt-5">
-                    <div class="col-12">
-                        <h1 class="text-center" style="font-weight: 700;">Create Your Custom QR Codes? Steps</h1>
-                        <div class="row mt-5">
-                            <div class="col-md-6">
-                                <h4 style="font-weight: 800;">Generate a QR code from URL fully Free.</h4>
-                                <p>It is easy to access all the QR Codes because you copy their link and paste it. QR
-                                    Code
-                                    is so
-                                    easy to generate.</p>
-
-                                <h4 class="mt-4" style="font-weight: 800;">QR helps to Pretend.</h4>
-                                <p class="mt-2">It is easy to access all the QR Codes because you copy their link and
-                                    paste
-                                    it.
-                                    QR Code is so easy to generate.</p>
-
-                                <h4 class="mt-4" style="font-weight: 800;">Add a Customized Logo in QR.</h4>
-                                <p class="mt-2">It is easy to access all the QR Codes because you copy their link and
-                                    paste
-                                    it.
-                                    QR Code is so easy to generate.</p>
-                            </div>
-                            <div class="col-md-6">
-                                <img src="4149572.jpg" alt="QR Code Examples" class="img-fluid"
-                                    style="max-height: 500px;">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">Email <i class="fa-solid fa-envelope"></i></div>
+                                    <p class="card-text">Generate QR codes that open a pre-filled email. Enter the
+                                        recipient, subject, and message, and our tool will create a QR code that
+                                        opens
+                                        an
+                                        email client with your details.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <a class="nav-link" href="#generateqr">
-
-                    <button>Generate Qr Code</button></a>
-
-                <div id="contactus" class="row contact-form">
-                    <div class="col-lg-12">
-                        <div class="row c-form mt-3 p-3">
-                            <div class="col-md-6 mb-3">
-                                <h2>Contact Us</h2>
-
-                                <form action="">
-                                    <div class="form-group">
-                                        Enter Name:
-                                        <input type="text" placeholder="Enter Name" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        Enter Email:
-                                        <input type="email" placeholder="Enter Email" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        Subject:
-                                        <input type="text" placeholder="Subject" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        Message:
-                                        <textarea class="form-control" placeholder="Message" id="textAreaExample1"
-                                            rows="4"></textarea>
-                                    </div>
-                                    <button type="submit">Send Message</button>
-                                </form>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2861.263842812673!2d81.24988077784244!3d26.212335046001986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399ba6cd279c35e3%3A0x3bebfc3932af9f37!2z4KS44KS_4KS14KS_4KSyIOCksuCkvuCkh-CkqOCljeCkuCDgpJrgpYzgpLDgpL7gpLngpL4!5e0!3m2!1shi!2sin!4v1721361276703!5m2!1shi!2sin"
-                                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">SMS <i class="fa-regular fa-comments"></i></div>
+                                    <p class="card-text">Create QR codes for SMS messages. Enter the phone number
+                                        and
+                                        message, and our generator will create a QR code that opens a messaging app
+                                        with
+                                        your pre-written text.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <h1 class="text-center mt-5 mb-4">Fusion QR Code Generator - Key Features</h1>
-                <div class="row">
-                    <!-- Feature 1: Generate QR Codes for Various Content Types -->
-                    <div class="col-md-6 mb-4">
-                        <div class="feature-box">
-                            <h2>Generate QR Codes</h2>
-                            <ul>
-                                <li>URL</li>
-                                <li>Text</li>
-                                <li>Email</li>
-                                <li>SMS</li>
-                                <li>Wi-Fi</li>
-                                <li>VCard</li>
-                                <li>Image</li>
-                                <li>Social Media</li>
-                                <li>Mobile</li>
-                            </ul>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">Whatsapp <i class="fa-brands fa-whatsapp"></i></div>
+                                    <p class="card-text">Generate QR codes for Wi-Fi access. Enter the SSID,
+                                        password,
+                                        and
+                                        encryption type, and our tool will create a QR code that allows users to
+                                        connect
+                                        to
+                                        your network easily.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">VCard <i class="fa-regular fa-address-card"></i></div>
+                                    <p class="card-text">Create QR codes for VCards. Enter contact details like
+                                        name,
+                                        phone,
+                                        email, address, and website, and our generator will create a QR code that
+                                        adds
+                                        your
+                                        contact to a device.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">Social Media <i class="fa-brands fa-facebook"></i>
+                                    </div>
+                                    <p class="card-text">Create QR codes for VCards. Enter contact details like
+                                        name,
+                                        phone,
+                                        email, address, and website, and our generator will create a QR code that
+                                        adds
+                                        your
+                                        contact to a device.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card" style="width: 100%;">
+                                <div class="card-body">
+                                    <div class="card-heading">Wifi <i class="fa-solid fa-wifi"></i></div>
+                                    <p class="card-text">Create QR codes for VCards. Enter contact details like
+                                        name,
+                                        phone,
+                                        email, address, and website, and our generator will create a QR code that
+                                        adds
+                                        your
+                                        contact to a device.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- Feature 2: Customization Options -->
-                    <div class="col-md-6 mb-4">
-                        <div class="feature-box">
-                            <h2>Customization Options</h2>
-                            <ul>
-                                <li>Design: Colors, Shapes, Logos</li>
-                                <li>Download Formats: JPG, SVG, EPS</li>
-                            </ul>
+  
+
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h1 class="text-center" style="font-weight: 700;">Create Your Custom QR Codes? Steps</h1>
+                    <div class="row mt-5">
+                        <div class="col-md-6">
+                            <h4 style="font-weight: 800;">Generate a QR code from URL fully Free.</h4>
+                            <p>It is easy to access all the QR Codes because you copy their link and paste it. QR
+                                Code
+                                is so
+                                easy to generate.</p>
+
+                            <h4 class="mt-4" style="font-weight: 800;">QR helps to Pretend.</h4>
+                            <p class="mt-2">It is easy to access all the QR Codes because you copy their link and
+                                paste
+                                it.
+                                QR Code is so easy to generate.</p>
+
+                            <h4 class="mt-4" style="font-weight: 800;">Add a Customized Logo in QR.</h4>
+                            <p class="mt-2">It is easy to access all the QR Codes because you copy their link and
+                                paste
+                                it.
+                                QR Code is so easy to generate.</p>
                         </div>
-                    </div>
-                    <!-- Feature 3: Responsive and Dynamic Interface -->
-                    <div class="col-md-6 mb-4">
-                        <div class="feature-box">
-                            <h2>Responsive & Dynamic</h2>
-                            <ul>
-                                <li>Fully Responsive Design</li>
-                                <li>Dynamic Content Fields</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Feature 4: User-Friendly Experience -->
-                    <div class="col-md-6 mb-4">
-                        <div class="feature-box">
-                            <h2>User-Friendly Experience</h2>
-                            <ul>
-                                <li>Interactive UI</li>
-                                <li>Instant QR Code Preview</li>
-                            </ul>
+                        <div class="col-md-6">
+                            <img src="4149572.jpg" alt="QR Code Examples" class="img-fluid" style="max-height: 500px;">
                         </div>
                     </div>
                 </div>
             </div>
 
+            <a class="nav-link" href="#generateqr">
+
+                <button>Generate Qr Code</button></a>
+
+
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="cta-box">
+                            <h2>Instantly make your <span>materials better</span></h2>
+                            <p>Add editable and trackable QR Codes on anything you want with full branding and customization features.</p>
+                            <a href="/register.html" class="btn btn-primary">CREATE FREE ACCOUNT</a>
+                        </div>
+                    </div>
+                </div>
+
+            <div id="contactus" class="row contact-form">
+                <div class="col-lg-12">
+                    <div class="row c-form mt-3 p-3">
+                        <div class="col-md-6 mb-3">
+                            <h2>Contact Us</h2>
+
+                            <form action="">
+                                <div class="form-group">
+                                    Enter Name:
+                                    <input type="text" placeholder="Enter Name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    Enter Email:
+                                    <input type="email" placeholder="Enter Email" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    Subject:
+                                    <input type="text" placeholder="Subject" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    Message:
+                                    <textarea class="form-control" placeholder="Message" id="textAreaExample1"
+                                        rows="4"></textarea>
+                                </div>
+                                <button type="submit">Send Message</button>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2861.263842812673!2d81.24988077784244!3d26.212335046001986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399ba6cd279c35e3%3A0x3bebfc3932af9f37!2z4KS44KS_4KS14KS_4KSyIOCksuCkvuCkh-CkqOCljeCkuCDgpJrgpYzgpLDgpL7gpLngpL4!5e0!3m2!1shi!2sin!4v1721361276703!5m2!1shi!2sin"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<div class="text-center " style="font-size: 30px; font-weight: 900; margin-top: 50px;" > Our <span class="text-success"> Visitors </span> </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="margin-top: 40px;">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="ratingcard">
+                            <img src="Untitled_design__2_-removebg-preview.png" alt="Image 1">
+                            <h5>Himanshu Singh</h5>
+                            <p>This is a description for the first card.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="ratingcard">
+                            <img src="download.png" alt="Image 2">
+                            <h5>Sunny Singh</h5>
+                            <p>This is a description for the second card.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="ratingcard">
+                            <img src="Newly.png" alt="Image 3" style="max-height:150px;">
+                            <h5>Mayank Tiwari</h5>
+                            <p>This is a description for the third card.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            
+
+            <h1 class="text-center mb-4" style="margin-top: 50px;">Fusion QR Code Generator - Key Features</h1>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h2 class="" style="font-size: 25px; font-weight: 900;">Generate QR Codes</h2>
+                        <ul>
+                            <li>URL</li>
+                            <li>Text</li>
+                            <li>Email</li>
+                            <li>SMS</li>
+                            <li>Wi-Fi</li>
+                            <li>VCard</li>
+                            <li>Image</li>
+                            <li>Social Media</li>
+                            <li>Mobile</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 2: Customization Options -->
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h2 class="" style="font-size: 25px; font-weight: 900;">Customization Options</h2>
+                        <ul>
+                            <li>Design: Colors, Shapes, Logos</li>
+                            <li>Download Formats: JPG, SVG, EPS</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 3: Responsive and Dynamic Interface -->
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h2 class="" style="font-size: 25px; font-weight: 900;">Responsive & Dynamic</h2>
+                        <ul>
+                            <li>Fully Responsive Design</li>
+                            <li>Dynamic Content Fields</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Feature 4: User-Friendly Experience -->
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h2 class="" style="font-size: 25px; font-weight: 900;">User-Friendly Experience</h2>
+                        <ul>
+                            <li>Interactive UI</li>
+                            <li>Instant QR Code Preview</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="footer">
-            &copy; 2024 QR Code Generator. All rights reserved by link <a
-                href="https://himanshusingh-45.github.io/">Himanshu Singh</a> .
-        </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+     <footer class="text-center text-lg-start bg-body-tertiary text-muted " style="margin-top: 30px; background: whitesmoke;">
+     <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+       <div class="me-5 d-none d-lg-block">
+        <span>Get connected with us on social networks:</span>
+      </div>
+   
+       <div>
+        
+        <a href="https://x.com/Himanshusing93?s=09" class="me-4 text-reset">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href=" https://in.linkedin.com/in/himanshu-singh-20844724a?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile" class="me-4 text-reset">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/himanshusingh-45" class="me-4 text-reset">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+     </section>
+   
+     <section class="">
+      <div class="container text-center text-md-start mt-5">
+         <div class="row mt-3">
+           <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+             <h6 class="text-uppercase fw-bold mb-4">
+              <i class="fas fa-gem me-3"></i>Fusion Qr
+            </h6>
+            <p>
+              Here you can use rows and columns to organize your footer content. Lorem ipsum
+              dolor sit amet, consectetur adipisicing elit.
+            </p>
+          </div>
+   
+           <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+             <h6 class="text-uppercase fw-bold mb-4">
+              Products
+            </h6>
+            <p>
+              <a href="#home" class="text-reset">Home</a>
+            </p>
+            <p>
+              <a href="#generateqr" class="text-reset">Generate Qr</a>
+            </p>
+            <p>
+              <a href="#feature" class="text-reset">Feature</a>
+            </p>
+            <p>
+              <a href="#contactus" class="text-reset">Contact</a>
+            </p>
+          </div>
+   
+           <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+             <h6 class="text-uppercase fw-bold mb-4">
+              Useful links
+            </h6>
+            <p>
+              <a href="https://github.com/himanshusingh-45" class="text-reset">github</a>
+            </p>
+            <p>
+              <a href=" https://in.linkedin.com/in/himanshu-singh-20844724a?utm_source=share&utm_medium=member_mweb&utm_campaign=share_via&utm_content=profile" class="text-reset">LinkedIn</a>
+            </p>
+            <p>
+              <a href="https://x.com/Himanshusing93?s=09" class="text-reset">Twitter</a>
+            </p>
+            <p>
+              <a href="https://www.facebook.com/profile.php?id=100045912690662  " class="text-reset">Facebook</a>
+            </p>
+          </div>
+   
+           <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+             <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+            <p><i class="fas fa-home me-3"></i> Raebareli , UttarPradesh</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              himanshu7007014@gmail.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> + 91 8418048084</p>
+            <p><i class="fas fa-print me-3"></i> + 91 7007014929</p>
+          </div>
+         </div>
+       </div>
+    </section>
+   
+    <div class="footer">
+        &copy; 2024 QR Code Generator. All rights reserved by link <a
+            href="https://himanshusingh-45.github.io/">Himanshu Singh</a> .
+    </div>
+      
+   </footer>
+ 
+    </div>
 
-
-        <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
-        <script>
-            function showFields(type) {
-                const fieldTypes = ['urlFields', 'textFields', 'emailFields', 'smsFields', 'wifiFields', 'vcardFields', 'imageFields', 'socialFields', 'mobileFields'];
-                fieldTypes.forEach((field) => {
-                    document.getElementById(field).style.display = (field === type) ? 'block' : 'none';
-                });
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+     <script>
+        function showFields(type) {
+            const fieldTypes = ['urlFields', 'textFields', 'emailFields', 'smsFields', 'wifiFields', 'vcardFields', 'imageFields', 'socialFields', 'mobileFields'];
+            fieldTypes.forEach((field) => {
+                document.getElementById(field).style.display = (field === type) ? 'block' : 'none';
+            });
+        }
+    
+        function generateQRCode() {
+            const qrcodeElement = document.getElementById("qrcode");
+            qrcodeElement.innerHTML = ''; // Clear previous QR code
+    
+            let qrValue = '';
+    
+            if (document.getElementById('urlFields').style.display === 'block') {
+                qrValue = document.getElementById('urlInput').value;
+            } else if (document.getElementById('textFields').style.display === 'block') {
+                qrValue = document.getElementById('textInput').value;
+            } else if (document.getElementById('emailFields').style.display === 'block') {
+                const email = document.getElementById('emailInput').value;
+                const subject = document.getElementById('subjectInput').value;
+                const message = document.getElementById('messageInput').value;
+                qrValue = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+            } else if (document.getElementById('smsFields').style.display === 'block') {
+                const phone = document.getElementById('phoneInput').value;
+                const message = document.getElementById('smsMessageInput').value;
+                qrValue = `sms:${phone}?body=${encodeURIComponent(message)}`;
+            } else if (document.getElementById('wifiFields').style.display === 'block') {
+                const ssid = document.getElementById('ssidInput').value;
+                const password = document.getElementById('passwordInput').value;
+                const encryption = document.getElementById('encryptionType').value;
+                qrValue = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
+            } else if (document.getElementById('vcardFields').style.display === 'block') {
+                const firstName = document.getElementById('firstNameInput').value;
+                const lastName = document.getElementById('lastNameInput').value;
+                const phone = document.getElementById('vcardPhoneInput').value;
+                const email = document.getElementById('vcardEmailInput').value;
+                const organization = document.getElementById('organizationInput').value;
+                const title = document.getElementById('titleInput').value;
+                const url = document.getElementById('vcardUrlInput').value;
+                qrValue = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nORG:${organization}\nTITLE:${title}\nTEL;TYPE=CELL:${phone}\nEMAIL:${email}\nURL:${url}\nEND:VCARD`;
+            } else if (document.getElementById('imageFields').style.display === 'block') {
+                qrValue = document.getElementById('imageUrlInput').value;
+            } else if (document.getElementById('socialFields').style.display === 'block') {
+                qrValue = document.getElementById('socialUrlInput').value;
+            } else if (document.getElementById('mobileFields').style.display === 'block') {
+                qrValue = document.getElementById('mobileUrlInput').value;
             }
-
-            function generateQRCode() {
-                const qrcodeElement = document.getElementById("qrcode");
-                qrcodeElement.innerHTML = ''; // Clear previous QR code
-
-                const selectedFields = document.querySelectorAll('.form-control');
-                let qrValue = '';
-
-                if (document.getElementById('urlFields').style.display === 'block') {
-                    qrValue = document.getElementById('urlInput').value;
-                } else if (document.getElementById('textFields').style.display === 'block') {
-                    qrValue = document.getElementById('textInput').value;
-                } else if (document.getElementById('emailFields').style.display === 'block') {
-                    const email = document.getElementById('emailInput').value;
-                    const subject = document.getElementById('subjectInput').value;
-                    const message = document.getElementById('messageInput').value;
-                    qrValue = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-                } else if (document.getElementById('smsFields').style.display === 'block') {
-                    const phone = document.getElementById('phoneInput').value;
-                    const message = document.getElementById('smsMessageInput').value;
-                    qrValue = `sms:${phone}?body=${encodeURIComponent(message)}`;
-                } else if (document.getElementById('wifiFields').style.display === 'block') {
-                    const ssid = document.getElementById('ssidInput').value;
-                    const password = document.getElementById('passwordInput').value;
-                    const encryption = document.getElementById('encryptionType').value;
-                    qrValue = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
-                } else if (document.getElementById('vcardFields').style.display === 'block') {
-                    const firstName = document.getElementById('firstNameInput').value;
-                    const lastName = document.getElementById('lastNameInput').value;
-                    const phone = document.getElementById('vcardPhoneInput').value;
-                    const email = document.getElementById('vcardEmailInput').value;
-                    const organization = document.getElementById('organizationInput').value;
-                    const title = document.getElementById('titleInput').value;
-                    const url = document.getElementById('vcardUrlInput').value;
-                    qrValue = `BEGIN:VCARD\nVERSION:3.0\nN:${lastName};${firstName}\nFN:${firstName} ${lastName}\nORG:${organization}\nTITLE:${title}\nTEL;TYPE=CELL:${phone}\nEMAIL:${email}\nURL:${url}\nEND:VCARD`;
-                } else if (document.getElementById('imageFields').style.display === 'block') {
-                    qrValue = document.getElementById('imageUrlInput').value;
-                } else if (document.getElementById('socialFields').style.display === 'block') {
-                    qrValue = document.getElementById('socialUrlInput').value;
-                } else if (document.getElementById('mobileFields').style.display === 'block') {
-                    qrValue = document.getElementById('mobileUrlInput').value;
-                }
-
-                // Generate the QR code
-                new QRCode(qrcodeElement, {
-                    text: qrValue,
-                    width: 256,
-                    height: 256
-                });
+    
+            // Generate the QR code
+            const qrCode = new QRCode(qrcodeElement, {
+                text: qrValue,
+                width: 256,
+                height: 256,
+                colorDark: document.getElementById('qrColor').value, // Set the color from customization options
+                colorLight: "#ffffff" // Background color remains white
+            });
+    
+            // Apply shape (circle or square)
+            const qrShape = document.getElementById('qrShape').value;
+            if (qrShape === 'circle') {
+                qrcodeElement.style.borderRadius = '50%';
+            } else {
+                qrcodeElement.style.borderRadius = '0';
             }
-
-            // Function to download the generated QR code
-            function downloadQRCode() {
-                const qrcodeElement = document.querySelector('#qrcode img');
-                if (qrcodeElement) {
-                    const qrURL = qrcodeElement.src;
-                    const link = document.createElement('a');
-                    link.href = qrURL;
-                    link.download = 'qrcode.png';
-                    link.click();
-                } else {
-                    alert('Please generate a QR code first!');
-                }
+    
+            // Apply logo if uploaded
+            const qrLogo = document.getElementById('qrLogo').files[0];
+            if (qrLogo) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const qrImage = qrcodeElement.querySelector('img');
+                    const logo = new Image();
+                    logo.src = e.target.result;
+                    logo.onload = function () {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = qrImage.width;
+                        canvas.height = qrImage.height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(qrImage, 0, 0, canvas.width, canvas.height);
+    
+                        const logoSize = Math.min(canvas.width, canvas.height) / 4;
+                        ctx.drawImage(logo, (canvas.width - logoSize) / 2, (canvas.height - logoSize) / 2, logoSize, logoSize);
+    
+                        qrImage.src = canvas.toDataURL();
+                    };
+                };
+                reader.readAsDataURL(qrLogo);
             }
-
-
-            // Customize qr code -
-            function toggleCustomization() {
-                var customizationOptions = document.getElementById('customizationOptions');
-                if (customizationOptions.classList.contains('hidden')) {
-                    customizationOptions.classList.remove('hidden');
-                } else {
-                    customizationOptions.classList.add('hidden');
-                }
+        }
+    
+        // Function to download the generated QR code
+        function downloadQRCode() {
+            const qrcodeElement = document.querySelector('#qrcode img');
+            if (qrcodeElement) {
+                const qrURL = qrcodeElement.src;
+                const link = document.createElement('a');
+                link.href = qrURL;
+                link.download = 'qrcode.png';
+                link.click();
+            } else {
+                alert('Please generate a QR code first!');
             }
+        }
+    
+        function toggleCustomization() {
+            var customizationOptions = document.getElementById('customizationOptions');
+            customizationOptions.classList.toggle('hidden');
+        }
+    
+        const ratingCarousel = document.getElementById('ratingCarousel');
+        const carousel = new bootstrap.Carousel(ratingCarousel, {
+            interval: 3000,
+            wrap: true
+        });
+    
+        function customizeQRCode() {
+            let customizeModal = new bootstrap.Modal(document.getElementById('customizeQRModal'));
+            customizeModal.show();
+        }
+    
+        function applyCustomization() {
+            generateQRCode(); // Regenerate the QR code with applied customizations
+            let customizeModal = bootstrap.Modal.getInstance(document.getElementById('customizeQRModal'));
+            customizeModal.hide();
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
 
-
-
-        </script>
-        <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"> </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"> </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
